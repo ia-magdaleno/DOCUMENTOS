@@ -1,0 +1,1916 @@
+<!-- PAGE: CENTRO DE DOCUMENTOS — DOCUMENTOS · CONSULTA E IMPRESIÓN -->
+<style>
+  /* ═══════════════════════════════════════════════════════════════════════════
+     CENTRO DE DOCUMENTOS ERP CALEBSYS
+     Sincronización 100% pura con Modo Oscuro y Modo Claro del Admin Shell
+     (sin modo mixto: oscuro con oscuro, claro con claro)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  :root {
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  /* MODO OSCURO (predeterminado cuando Admin Shell está en oscuro) */
+  .dc-shell {
+    --dc-bg: #0d1526;
+    --dc-surface: #111d35;
+    --dc-surface-2: #162442;
+    --dc-surface-hover: rgba(255, 255, 255, 0.05);
+    --dc-surface-sel: rgba(37, 99, 235, 0.22);
+    --dc-border: rgba(148, 163, 184, 0.16);
+    --dc-border-strong: rgba(148, 163, 184, 0.28);
+    --dc-text: #f1f5f9;
+    --dc-text-2: #cbd5e1;
+    --dc-muted: #94a3b8;
+    --dc-blue: #3b82f6;
+    --dc-blue-hover: #2563eb;
+    --dc-blue-soft: rgba(59, 130, 246, 0.20);
+    --dc-graphite: #1e293b;
+    --dc-stage-bg: #08101f;
+    --dc-thumb-chk-bg: rgba(17, 29, 53, 0.90);
+    --dc-ok-bg: rgba(16, 185, 129, 0.18);
+    --dc-ok-txt: #6ee7b7;
+    --dc-info-bg: rgba(59, 130, 246, 0.20);
+    --dc-info-txt: #93c5fd;
+    --dc-warn-bg: rgba(245, 158, 11, 0.18);
+    --dc-warn-txt: #fcd34d;
+    --dc-err-bg: rgba(239, 68, 68, 0.20);
+    --dc-err-txt: #fca5a5;
+    --dc-neutral-bg: rgba(148, 163, 184, 0.15);
+    --dc-neutral-txt: #cbd5e1;
+    --dc-cat-compras-bg: rgba(168, 85, 247, 0.20);
+    --dc-cat-compras-txt: #d8b4fe;
+    --dc-cat-almacen-bg: rgba(249, 115, 22, 0.20);
+    --dc-cat-almacen-txt: #fdba74;
+    --dc-cat-fact-bg: rgba(16, 185, 129, 0.20);
+    --dc-cat-fact-txt: #6ee7b7;
+    --dc-cat-caja-bg: rgba(148, 163, 184, 0.18);
+    --dc-cat-caja-txt: #cbd5e1;
+    --dc-cat-cartera-bg: rgba(14, 165, 233, 0.20);
+    --dc-cat-cartera-txt: #7dd3fc;
+    --dc-cat-rrhh-bg: rgba(236, 72, 153, 0.20);
+    --dc-cat-rrhh-txt: #f9a8d4;
+    --dc-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    --dc-drawer-w: 430px;
+
+    color-scheme: dark;
+    scrollbar-color: rgba(148, 163, 184, 0.32) transparent;
+    margin: -18px -22px;
+    padding: 16px 20px 44px;
+    min-height: calc(100vh - var(--topbar-h, 68px));
+    background: var(--dc-bg);
+    color: var(--dc-text);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* MODO CLARO (activo cuando <html data-theme="light"> en Admin Shell) */
+  :root[data-theme="light"] .dc-shell {
+    --dc-bg: #ecf1f7;
+    --dc-surface: #ffffff;
+    --dc-surface-2: #f8fafc;
+    --dc-surface-hover: #f1f5f9;
+    --dc-surface-sel: #e8f0fe;
+    --dc-border: #dbe3ee;
+    --dc-border-strong: #cbd5e1;
+    --dc-text: #0f172a;
+    --dc-text-2: #334155;
+    --dc-muted: #64748b;
+    --dc-blue: #1a56db;
+    --dc-blue-hover: #1e40af;
+    --dc-blue-soft: rgba(26, 86, 219, 0.10);
+    --dc-graphite: #1e293b;
+    --dc-stage-bg: #e2e8f0;
+    --dc-thumb-chk-bg: rgba(255, 255, 255, 0.92);
+    --dc-ok-bg: #dcfce7;
+    --dc-ok-txt: #166534;
+    --dc-info-bg: #dbeafe;
+    --dc-info-txt: #1e40af;
+    --dc-warn-bg: #fef3c7;
+    --dc-warn-txt: #92400e;
+    --dc-err-bg: #fee2e2;
+    --dc-err-txt: #991b1b;
+    --dc-neutral-bg: #f1f5f9;
+    --dc-neutral-txt: #475569;
+    --dc-cat-compras-bg: #f3e8ff;
+    --dc-cat-compras-txt: #6b21a8;
+    --dc-cat-almacen-bg: #ffedd5;
+    --dc-cat-almacen-txt: #9a3412;
+    --dc-cat-fact-bg: #dcfce7;
+    --dc-cat-fact-txt: #166534;
+    --dc-cat-caja-bg: #f1f5f9;
+    --dc-cat-caja-txt: #334155;
+    --dc-cat-cartera-bg: #e0f2fe;
+    --dc-cat-cartera-txt: #075985;
+    --dc-cat-rrhh-bg: #fce7f3;
+    --dc-cat-rrhh-txt: #9d174d;
+    --dc-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+
+    color-scheme: light;
+    scrollbar-color: rgba(100, 116, 139, 0.38) transparent;
+  }
+
+  .dc-shell [hidden] {
+    display: none !important;
+  }
+
+  .dc-shell select option,
+  .dc-shell select optgroup {
+    background-color: var(--dc-surface);
+    color: var(--dc-text);
+  }
+
+  .dc-shell :focus-visible {
+    outline: 2px solid var(--dc-blue);
+    outline-offset: 2px;
+  }
+
+  .dc-sr-only {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* ── ENCABEZADO SUPERIOR ── */
+  .dc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .dc-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+  .dc-title-wrap h1 {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--dc-text);
+    line-height: 1.15;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .dc-title-sub {
+    font-size: 12.5px;
+    color: var(--dc-muted);
+    margin-top: 2px;
+  }
+  .dc-session-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--dc-text-2);
+  }
+  .dc-session-chip img {
+    height: 16px;
+    width: auto;
+    max-width: 64px;
+    object-fit: contain;
+  }
+
+  .dc-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .dc-seg-group {
+    display: inline-flex;
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .dc-seg-btn {
+    height: 31px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--dc-text-2);
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+  }
+  .dc-seg-btn[aria-pressed="true"] {
+    background: var(--dc-blue);
+    color: #ffffff;
+    box-shadow: 0 1px 4px rgba(26, 86, 219, 0.3);
+  }
+  .dc-btn {
+    height: 36px;
+    padding: 0 13px;
+    border-radius: 9px;
+    border: 1px solid var(--dc-border);
+    background: var(--dc-surface);
+    color: var(--dc-text);
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: border-color .15s, background .15s;
+  }
+  .dc-btn:hover:not(:disabled) {
+    background: var(--dc-surface-hover);
+    border-color: var(--dc-border-strong);
+  }
+  .dc-btn:disabled {
+    opacity: 0.48;
+    cursor: not-allowed;
+  }
+  .dc-btn-primary {
+    background: var(--dc-blue);
+    border-color: var(--dc-blue);
+    color: #ffffff;
+    font-weight: 700;
+  }
+  .dc-btn-primary:hover:not(:disabled) {
+    background: var(--dc-blue-hover);
+    border-color: var(--dc-blue-hover);
+  }
+
+  /* ── CONTENEDOR PRINCIPAL (LISTADO + EXPEDIENTE) ── */
+  .dc-workspace {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+    position: relative;
+  }
+
+  /* ── ZONA CENTRAL (BUSCADOR, FILTROS, FRANJA KPI, TABLA/MINIATURAS) ── */
+  .dc-center {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dc-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .dc-search-box {
+    flex: 1;
+    min-width: 240px;
+    height: 40px;
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    border-radius: 10px;
+    padding: 0 10px 0 13px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    box-shadow: var(--dc-shadow);
+  }
+  .dc-search-box:focus-within {
+    border-color: var(--dc-blue);
+    box-shadow: 0 0 0 3px var(--dc-blue-soft);
+  }
+  .dc-search-box i {
+    color: var(--dc-muted);
+    font-size: 13.5px;
+  }
+  .dc-search-box input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--dc-text);
+    font-size: 13.5px;
+    font-family: inherit;
+  }
+  .dc-search-box input::placeholder {
+    color: var(--dc-muted);
+  }
+  .dc-kbd-hint {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--dc-muted);
+    background: var(--dc-surface-2);
+    border: 1px solid var(--dc-border);
+    border-radius: 6px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+  .dc-branch-select {
+    height: 40px;
+    min-width: 170px;
+    max-width: 240px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid var(--dc-border);
+    background: var(--dc-surface);
+    color: var(--dc-text);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: var(--dc-shadow);
+  }
+
+  /* Barra rápida de categorías sincronizada con la referencia */
+  .dc-cat-strip {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--dc-border);
+    padding: 0 4px;
+    scrollbar-width: none;
+  }
+  .dc-cat-tab {
+    position: relative;
+    border: none;
+    background: transparent;
+    color: var(--dc-muted);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 2px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .dc-cat-tab:hover {
+    color: var(--dc-text);
+  }
+  .dc-cat-tab[aria-selected="true"] {
+    color: var(--dc-blue);
+  }
+  .dc-cat-tab[aria-selected="true"]::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    border-block-end: 3px solid var(--dc-blue);
+  }
+
+  /* Fila de selectores rápidos + franja compacta de cifras */
+  .dc-filter-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .dc-filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .dc-pill-select {
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid var(--dc-border);
+    background: var(--dc-surface);
+    color: var(--dc-text-2);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .dc-pill-btn {
+    height: 32px;
+    padding: 0 11px;
+    border-radius: 8px;
+    border: 1px solid var(--dc-border);
+    background: var(--dc-surface);
+    color: var(--dc-text-2);
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .dc-pill-btn:hover {
+    border-color: var(--dc-blue);
+    color: var(--dc-blue);
+  }
+
+  .dc-metrics-strip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .dc-metric-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    font-size: 11.8px;
+    color: var(--dc-text-2);
+  }
+  .dc-metric-chip strong {
+    color: var(--dc-text);
+    font-weight: 800;
+  }
+  .dc-metric-chip.dc-metric-err {
+    background: var(--dc-err-bg);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: var(--dc-err-txt);
+    cursor: pointer;
+  }
+  .dc-metric-chip.dc-metric-err strong {
+    color: var(--dc-err-txt);
+  }
+  .dc-metrics-help-box {
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: var(--dc-text-2);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 8px;
+  }
+  .dc-metrics-help-box[hidden] {
+    display: none;
+  }
+
+  /* Panel desplegable de Más Filtros */
+  .dc-more-filters {
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    border-radius: 12px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    box-shadow: var(--dc-shadow);
+  }
+  .dc-more-filters[hidden] {
+    display: none;
+  }
+  .dc-fld {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .dc-fld label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--dc-muted);
+  }
+  .dc-fld input, .dc-fld select {
+    height: 32px;
+    padding: 0 9px;
+    border-radius: 7px;
+    border: 1px solid var(--dc-border);
+    background: var(--dc-surface-2);
+    color: var(--dc-text);
+    font-size: 12px;
+    font-family: inherit;
+  }
+
+  /* Chips de filtros activos removibles */
+  .dc-chips-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .dc-chips-row[hidden] {
+    display: none;
+  }
+  .dc-active-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--dc-blue-soft);
+    color: var(--dc-blue);
+    font-size: 11.5px;
+    font-weight: 700;
+  }
+  .dc-active-chip button {
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    padding: 0 2px;
+  }
+
+  /* Consolidado de Corte Z exclusivo en pantalla */
+  .dc-consolidado-banner {
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-blue);
+    border-left-width: 4px;
+    border-radius: 11px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .dc-consolidado-banner[hidden] {
+    display: none;
+  }
+
+  /* Barra de selección por lote */
+  .dc-batch-bar {
+    background: var(--dc-graphite);
+    color: #ffffff;
+    border-radius: 11px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .dc-batch-bar[hidden] {
+    display: none;
+  }
+
+  /* ── REGIÓN DE TABLA PRINCIPAL (modern-web-guidance: responsive-table + sortable-table) ── */
+  .dc-table-card {
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    border-radius: 14px;
+    box-shadow: var(--dc-shadow);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 320px;
+    overflow: hidden;
+  }
+  .dc-table-region {
+    overflow: auto;
+    max-inline-size: 100%;
+    flex: 1;
+    max-block-size: calc(100vh - 355px);
+    min-block-size: 240px;
+    container-type: inline-size;
+  }
+  .dc-table {
+    width: 100%;
+    min-inline-size: 640px;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .dc-table thead {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 2;
+  }
+  .dc-table th {
+    background: var(--dc-surface-2);
+    color: var(--dc-muted);
+    font-size: 11.5px;
+    font-weight: 700;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--dc-border);
+    white-space: nowrap;
+  }
+  .dc-table th:has(> button) {
+    padding: 0;
+  }
+  .dc-sort-btn {
+    width: 100%;
+    min-height: 38px;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .dc-sort-btn:hover {
+    color: var(--dc-text);
+  }
+  .dc-table th[aria-sort] .dc-sort-btn {
+    color: var(--dc-blue);
+  }
+  .dc-sort-ico::before {
+    content: "↕";
+    opacity: 0.35;
+    font-size: 11px;
+  }
+  .dc-table th[aria-sort="ascending"] .dc-sort-ico::before {
+    content: "↑";
+    opacity: 1;
+  }
+  .dc-table th[aria-sort="descending"] .dc-sort-ico::before {
+    content: "↓";
+    opacity: 1;
+  }
+
+  .dc-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--dc-border);
+    font-size: 13px;
+    color: var(--dc-text);
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .dc-shell[data-density="compact"] .dc-table td {
+    padding: 6px 10px;
+    font-size: 12.2px;
+  }
+  .dc-table tbody tr.dc-doc-row {
+    cursor: pointer;
+    transition: background .12s;
+  }
+  .dc-table tbody tr.dc-doc-row:hover td {
+    background: var(--dc-surface-hover);
+  }
+  .dc-table tbody tr.dc-doc-row.active td {
+    background: var(--dc-surface-sel);
+  }
+  .dc-table tbody tr.dc-doc-row.active td:first-child {
+    box-shadow: inset 3px 0 0 var(--dc-blue);
+  }
+
+  .dc-col-check {
+    width: 38px;
+    text-align: center !important;
+    padding-left: 10px !important;
+    padding-right: 6px !important;
+  }
+  .dc-row-check {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--dc-blue);
+    cursor: pointer;
+  }
+  .dc-doc-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dc-doc-ico {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    background: var(--dc-info-bg);
+    color: var(--dc-info-txt);
+  }
+  .dc-doc-ico.cat-compras { background: var(--dc-cat-compras-bg); color: var(--dc-cat-compras-txt); }
+  .dc-doc-ico.cat-almacen { background: var(--dc-cat-almacen-bg); color: var(--dc-cat-almacen-txt); }
+  .dc-doc-ico.cat-facturacion { background: var(--dc-cat-fact-bg); color: var(--dc-cat-fact-txt); }
+  .dc-doc-ico.cat-caja { background: var(--dc-cat-caja-bg); color: var(--dc-cat-caja-txt); }
+  .dc-doc-ico.cat-cartera { background: var(--dc-cat-cartera-bg); color: var(--dc-cat-cartera-txt); }
+  .dc-doc-ico.cat-rrhh { background: var(--dc-cat-rrhh-bg); color: var(--dc-cat-rrhh-txt); }
+
+  .dc-folio-main {
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--dc-text);
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dc-folio-sub {
+    font-size: 11.5px;
+    color: var(--dc-muted);
+    margin-top: 1px;
+  }
+  .dc-tercero-main {
+    font-weight: 600;
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dc-num-col {
+    text-align: right !important;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+
+  /* Píldoras de estado */
+  .dc-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 700;
+  }
+  .dc-st-ok { background: var(--dc-ok-bg); color: var(--dc-ok-txt); }
+  .dc-st-info { background: var(--dc-info-bg); color: var(--dc-info-txt); }
+  .dc-st-warn { background: var(--dc-warn-bg); color: var(--dc-warn-txt); }
+  .dc-st-err { background: var(--dc-err-bg); color: var(--dc-err-txt); }
+  .dc-st-neutral { background: var(--dc-neutral-bg); color: var(--dc-neutral-txt); }
+
+  .dc-row-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .dc-icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--dc-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+  .dc-icon-btn:hover {
+    background: var(--dc-surface-2);
+    border-color: var(--dc-border);
+    color: var(--dc-blue);
+  }
+  .dc-icon-btn.fav-on {
+    color: #eab308;
+  }
+
+  /* Vista Miniaturas (Galería) */
+  .dc-grid-view {
+    padding: 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    overflow-y: auto;
+    max-height: calc(100vh - 355px);
+  }
+  .dc-grid-view[hidden] {
+    display: none;
+  }
+  .dc-thumb-card {
+    background: var(--dc-surface-2);
+    border: 1px solid var(--dc-border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform .12s, border-color .15s;
+  }
+  .dc-thumb-card:hover, .dc-thumb-card.active {
+    border-color: var(--dc-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--dc-shadow);
+  }
+  .dc-thumb-img-wrap {
+    height: 185px;
+    background: var(--dc-stage-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .dc-thumb-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #ffffff;
+  }
+  .dc-thumb-chk-wrap {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--dc-thumb-chk-bg);
+    border: 1px solid var(--dc-border);
+    border-radius: 6px;
+    padding: 3px 5px;
+  }
+  .dc-thumb-meta {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  /* Paginador y barra contextual inferior */
+  .dc-table-footer {
+    padding: 10px 14px;
+    border-top: 1px solid var(--dc-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--dc-muted);
+  }
+  .dc-context-bar {
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    border-radius: 12px;
+    padding: 9px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    box-shadow: var(--dc-shadow);
+    font-size: 12.5px;
+  }
+  .dc-context-links {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .dc-link-btn {
+    border: none;
+    background: transparent;
+    color: var(--dc-blue);
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+  }
+  .dc-link-btn:hover {
+    text-decoration: underline;
+  }
+
+  /* ── ZONA 3: EXPEDIENTE DERECHO (PLEGABLE, REDIMENSIONABLE Y AMPLIABLE) ── */
+  .dc-expediente {
+    width: var(--dc-drawer-w, 430px);
+    flex: 0 0 var(--dc-drawer-w, 430px);
+    background: var(--dc-surface);
+    border: 1px solid var(--dc-border);
+    border-radius: 14px;
+    box-shadow: var(--dc-shadow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 0;
+    max-height: calc(100vh - 150px);
+  }
+  .dc-expediente[hidden] {
+    display: none;
+  }
+  .dc-shell.exp-expanded .dc-expediente {
+    --dc-drawer-w: min(680px, 56vw);
+  }
+  .dc-resizer {
+    position: absolute;
+    left: -6px;
+    top: 24px;
+    bottom: 24px;
+    width: 10px;
+    cursor: col-resize;
+    z-index: 10;
+  }
+  .dc-resizer::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 38px;
+    border-radius: 99px;
+    background: var(--dc-border-strong);
+  }
+  .dc-resizer:hover::after {
+    background: var(--dc-blue);
+  }
+
+  .dc-exp-header {
+    padding: 13px 15px 10px;
+    border-bottom: 1px solid var(--dc-border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .dc-exp-toprow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .dc-exp-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--dc-text);
+  }
+  .dc-exp-folio-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+
+  /* Pestañas del Expediente (modern-web-guidance: tabs) */
+  .dc-exp-tablist {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 15px;
+    border-bottom: 1px solid var(--dc-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .dc-exp-tab {
+    position: relative;
+    border: none;
+    background: transparent;
+    color: var(--dc-muted);
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 9px 2px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .dc-exp-tab[aria-selected="true"] {
+    color: var(--dc-blue);
+  }
+  .dc-exp-tab[aria-selected="true"]::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    border-block-end: 3px solid var(--dc-blue);
+  }
+
+  .dc-exp-panels {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .dc-exp-panel-inner {
+    padding: 12px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dc-preview-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .dc-zoom-box {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--dc-border);
+    border-radius: 8px;
+    background: var(--dc-surface-2);
+    overflow: hidden;
+  }
+  .dc-zoom-box button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: var(--dc-text);
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .dc-zoom-box span {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 0 6px;
+    min-width: 44px;
+    text-align: center;
+  }
+
+  .dc-rep-notice {
+    font-size: 11.2px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--dc-border);
+    background: var(--dc-surface-2);
+    color: var(--dc-text-2);
+    line-height: 1.35;
+  }
+  .dc-rep-notice.reconstructed {
+    background: var(--dc-warn-bg);
+    color: var(--dc-warn-txt);
+    border-color: rgba(245, 158, 11, 0.35);
+  }
+  .dc-rep-notice.conserved {
+    background: var(--dc-ok-bg);
+    color: var(--dc-ok-txt);
+    border-color: rgba(22, 101, 52, 0.25);
+  }
+
+  .dc-paper-stage {
+    background: var(--dc-stage-bg);
+    border: 1px solid var(--dc-border);
+    border-radius: 10px;
+    min-height: 270px;
+    max-height: 410px;
+    overflow: auto;
+    padding: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .dc-paper-stage img {
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.18);
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+    transform-origin: top center;
+  }
+  .dc-xml-pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 11px;
+    overflow: auto;
+    width: 100%;
+    max-height: 360px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* Cuadrícula de Datos del Expediente */
+  .dc-kv-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .dc-kv-box {
+    background: var(--dc-surface-2);
+    border: 1px solid var(--dc-border);
+    border-radius: 9px;
+    padding: 8px 10px;
+  }
+  .dc-kv-lbl {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--dc-muted);
+  }
+  .dc-kv-val {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--dc-text);
+    margin-top: 2px;
+    word-break: break-word;
+  }
+
+  .dc-rel-card, .dc-act-item {
+    background: var(--dc-surface-2);
+    border: 1px solid var(--dc-border);
+    border-radius: 10px;
+    padding: 9px 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .dc-rel-card.clickable {
+    cursor: pointer;
+  }
+  .dc-rel-card.clickable:hover {
+    border-color: var(--dc-blue);
+  }
+
+  /* Botonera fija inferior del Expediente: Imprimir, Descargar, Enviar */
+  .dc-exp-actions {
+    padding: 12px 15px;
+    border-top: 1px solid var(--dc-border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--dc-surface);
+    border-radius: 0 0 14px 14px;
+  }
+  .dc-exp-actions-sec {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  /* Estados de carga, vacío, error, sin permiso */
+  .dc-state-box {
+    padding: 44px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--dc-muted);
+  }
+  .dc-state-box i {
+    font-size: 28px;
+    color: var(--dc-blue);
+  }
+
+  /* ── ADAPTACIÓN A 1366 × 768 Y MÓVIL ── */
+  @media (max-width: 1420px) {
+    .dc-shell.exp-overlay-mode .dc-expediente {
+      position: fixed;
+      top: calc(var(--topbar-h, 68px) + 8px);
+      right: 14px;
+      bottom: 14px;
+      z-index: 80;
+      width: min(460px, 92vw);
+      max-height: none;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.32);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .dc-shell {
+      margin: -14px -12px;
+      padding: 12px;
+    }
+    .dc-expediente {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      max-height: 100dvh !important;
+      border-radius: 0 !important;
+      z-index: 95 !important;
+    }
+    .dc-resizer {
+      display: none;
+    }
+  }
+
+  /* ── DIÁLOGOS NATIVOS (<dialog> modern-web-guidance) ── */
+  dialog.dc-dialog {
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--dc-border-strong);
+    border-radius: 16px;
+    background: var(--dc-surface);
+    color: var(--dc-text);
+    width: min(640px, 94vw);
+    max-height: 90dvh;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+  dialog.dc-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+  dialog.dc-dialog:modal {
+    overscroll-behavior: contain;
+  }
+  dialog.dc-dialog::backdrop {
+    background: rgba(8, 16, 31, 0.62);
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+  .dc-dlg-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--dc-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .dc-dlg-head h2 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--dc-text);
+  }
+  .dc-dlg-body {
+    padding: 16px 18px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--dc-text);
+  }
+  .dc-dlg-foot {
+    padding: 12px 18px;
+    border-top: 1px solid var(--dc-border);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    background: var(--dc-surface-2);
+    border-radius: 0 0 16px 16px;
+  }
+  .dc-upper-input {
+    text-transform: uppercase;
+  }
+</style>
+
+<div class="dc-shell exp-overlay-mode" id="dc-root" data-density="comfortable">
+  <div id="dc-live-status" role="status" class="dc-sr-only"></div>
+
+  <!-- ═══ CABECERA PRINCIPAL ═══ -->
+  <header class="dc-header">
+    <div class="dc-header-left">
+      <div class="dc-title-wrap">
+        <h1>
+          <span id="dc-main-title">Centro de documentos</span>
+          <span class="dc-session-chip" id="dc-session-chip" title="Empresa y sucursal activas de la sesión">
+            <img id="dc-session-logo" alt="" hidden>
+            <i class="fa-solid fa-building" id="dc-session-ico" aria-hidden="true"></i>
+            <span id="dc-session-label">Cargando sesión...</span>
+          </span>
+        </h1>
+        <p class="dc-title-sub">Consulta, imprime y comparte los documentos emitidos autorizados de tu empresa.</p>
+      </div>
+    </div>
+
+    <div class="dc-header-actions">
+      <div class="dc-seg-group" role="group" aria-label="Modo de visualización">
+        <button type="button" class="dc-seg-btn" id="dc-view-list" aria-pressed="true">
+          <i class="fa-solid fa-list" aria-hidden="true"></i> Lista
+        </button>
+        <button type="button" class="dc-seg-btn" id="dc-view-grid" aria-pressed="false">
+          <i class="fa-solid fa-grip" aria-hidden="true"></i> Miniaturas
+        </button>
+      </div>
+
+      <button type="button" class="dc-btn" id="dc-btn-print-report" title="Imprimir reporte del listado filtrado">
+        <i class="fa-solid fa-print" aria-hidden="true"></i> Imprimir reporte
+      </button>
+      <button type="button" class="dc-btn" id="dc-btn-open-export" title="Exportar listado filtrado a CSV o Excel">
+        <i class="fa-solid fa-download" aria-hidden="true"></i> Exportar
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ ESPACIO DE TRABAJO (LISTADO + EXPEDIENTE) ═══ -->
+  <div class="dc-workspace">
+
+    <!-- ─── ZONA CENTRAL: BUSCADOR, FILTROS, FRANJA KPI Y LISTADO ─── -->
+    <section class="dc-center" aria-label="Listado y búsqueda de documentos">
+
+      <!-- Buscador + Único Selector de Sucursal + Guardar Vista -->
+      <div class="dc-search-bar">
+        <div class="dc-search-box">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="dc-search-input" placeholder="Buscar por folio, serie, cliente, proveedor, RFC, UUID o referencia..." aria-label="Buscar documentos">
+          <button type="button" class="dc-icon-btn" id="dc-search-clear" title="Limpiar búsqueda" aria-label="Limpiar búsqueda" hidden>
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+          <span class="dc-kbd-hint" aria-hidden="true">Ctrl+K</span>
+        </div>
+
+        <select id="dc-branch-select" class="dc-branch-select" aria-label="Sucursal de emisión">
+          <option value="ALL">Todas las sucursales</option>
+        </select>
+
+        <button type="button" class="dc-btn" id="dc-btn-save-view" title="Guardar combinación actual de filtros como vista">
+          <i class="fa-regular fa-bookmark" aria-hidden="true"></i> Guardar vista
+        </button>
+      </div>
+
+      <!-- Pestañas de categoría -->
+      <div class="dc-cat-strip" role="tablist" aria-label="Categorías documentales" id="dc-quick-cats">
+        <button type="button" role="tab" class="dc-cat-tab" data-qcat="" aria-selected="true">Todos</button>
+      </div>
+
+      <!-- Controles de filtro + Franja compacta de cifras explicadas -->
+      <div class="dc-filter-strip">
+        <div class="dc-filter-controls">
+          <select id="dc-quick-subtype" class="dc-pill-select" aria-label="Tipo de documento">
+            <option value="">Tipo de documento (Todos)</option>
+          </select>
+
+          <select id="dc-quick-period" class="dc-pill-select" aria-label="Periodo de emisión">
+            <option value="">Todo el historial</option>
+            <option value="today">Emitidos hoy</option>
+            <option value="7d">Últimos 7 días</option>
+            <option value="30d">Últimos 30 días</option>
+            <option value="custom">Rango personalizado...</option>
+          </select>
+
+          <select id="dc-quick-status" class="dc-pill-select" aria-label="Estado documental">
+            <option value="">Estado (Todos)</option>
+            <option value="EMITIDA">Emitida</option>
+            <option value="TIMBRADA">Timbrada</option>
+            <option value="APLICADA">Aplicada</option>
+            <option value="VIGENTE">Vigente</option>
+            <option value="ENTREGADA">Entregada</option>
+            <option value="CERRADO">Cerrado</option>
+            <option value="REGISTRADO">Registrado</option>
+            <option value="CANCELADA">Cancelada</option>
+          </select>
+
+          <select id="dc-saved-view-select" class="dc-pill-select" aria-label="Vistas rápidas y guardadas">
+            <option value="preset:all">Vista: Todos</option>
+            <option value="preset:recents">Recientes</option>
+            <option value="preset:favorites">Favoritos</option>
+          </select>
+          <button type="button" class="dc-icon-btn" id="dc-btn-del-saved-view" title="Eliminar vista guardada activa" aria-label="Eliminar vista guardada" hidden>
+            <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+          </button>
+
+          <button type="button" class="dc-pill-btn" id="dc-btn-more-filters" aria-expanded="false">
+            <i class="fa-solid fa-sliders" aria-hidden="true"></i> Más filtros
+          </button>
+
+          <button type="button" class="dc-pill-btn" id="dc-btn-prefs" title="Ajustar columnas visibles, densidad y modo del expediente">
+            <i class="fa-solid fa-table-cells" aria-hidden="true"></i> Columnas y vista
+          </button>
+        </div>
+
+        <!-- Franja compacta: resultados, emitidos hoy, envíos con error + explicación -->
+        <div class="dc-metrics-strip">
+          <span class="dc-metric-chip" id="dc-metric-results" title="Documentos emitidos autorizados que coinciden con los filtros activos">
+            <strong id="dc-num-results">0</strong> documentos
+          </span>
+          <span class="dc-metric-chip" id="dc-metric-today" title="Documentos emitidos hoy en la zona horaria configurada de la sucursal">
+            <strong id="dc-num-today">0</strong> hoy
+          </span>
+          <button type="button" class="dc-metric-chip dc-metric-err" id="dc-metric-errors" hidden title="Clic para filtrar los documentos cuyo último intento de envío registró error">
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <strong id="dc-num-errors">0</strong> envíos con error
+          </button>
+          <button type="button" class="dc-icon-btn" id="dc-btn-metrics-help" title="¿Qué cuenta cada cifra?" aria-label="Explicación de las cifras del encabezado">
+            <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Explicación explícita de qué cuenta cada cifra -->
+      <div class="dc-metrics-help-box" id="dc-metrics-help-box" hidden>
+        <div><strong>Resultados filtrados:</strong> <span id="dc-exp-filtered">Cuenta los documentos emitidos autorizados que cumplen la búsqueda y filtros activos.</span></div>
+        <div><strong>Emitidos hoy:</strong> <span id="dc-exp-today">Cuenta los documentos emitidos en la fecha local actual según la zona horaria de la sucursal seleccionada.</span></div>
+        <div><strong>Envíos con error:</strong> <span id="dc-exp-errors">Cuenta los documentos cuyo último intento de envío por correo o WhatsApp falló y admite revisión o reintento.</span></div>
+      </div>
+
+      <!-- Panel expandible de Más Filtros -->
+      <div class="dc-more-filters" id="dc-more-filters-panel" hidden>
+        <div class="dc-fld">
+          <label for="dc-f-from">Desde (zona sucursal)</label>
+          <input type="date" id="dc-f-from">
+        </div>
+        <div class="dc-fld">
+          <label for="dc-f-to">Hasta (zona sucursal)</label>
+          <input type="date" id="dc-f-to">
+        </div>
+        <div class="dc-fld">
+          <label for="dc-f-emisor">Emisor / Usuario</label>
+          <input type="text" id="dc-f-emisor" class="dc-upper-input" placeholder="EJ. JUAN, AMAGDALENO">
+        </div>
+        <div class="dc-fld">
+          <label for="dc-f-nature">Naturaleza</label>
+          <select id="dc-f-nature">
+            <option value="">Todas</option>
+            <option value="EMITIDO">Documento emitido</option>
+            <option value="REPORTE_AL_MOMENTO">Reporte al momento</option>
+            <option value="ADJUNTO">Archivo adjunto</option>
+          </select>
+        </div>
+        <div class="dc-fld">
+          <label for="dc-f-currency">Moneda</label>
+          <select id="dc-f-currency">
+            <option value="">Todas</option>
+            <option value="MXN">MXN</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+        <div class="dc-fld" id="dc-fld-min-wrap">
+          <label for="dc-f-min">Importe mín.</label>
+          <input type="number" id="dc-f-min" step="0.01" min="0" placeholder="0.00">
+        </div>
+        <div class="dc-fld" id="dc-fld-max-wrap">
+          <label for="dc-f-max">Importe máx.</label>
+          <input type="number" id="dc-f-max" step="0.01" min="0" placeholder="99999.00">
+        </div>
+        <div class="dc-fld">
+          <label for="dc-f-fiscal">Estado fiscal</label>
+          <select id="dc-f-fiscal">
+            <option value="">Todos</option>
+            <option value="TIMBRADO">Timbrado</option>
+            <option value="TIMBRADA">Timbrada</option>
+            <option value="SIN_FACTURAR">Sin facturar</option>
+            <option value="CANCELADO_SAT">Cancelado SAT</option>
+            <option value="INTERNO_NO_FISCAL">Interno no fiscal</option>
+          </select>
+        </div>
+        <div class="dc-fld">
+          <label for="dc-f-dispatch">Estado de envío</label>
+          <select id="dc-f-dispatch">
+            <option value="">Todos</option>
+            <option value="SIN_ENVIO">Sin envíos</option>
+            <option value="ENVIADO">Enviado</option>
+            <option value="ENTREGADO">Entregado</option>
+            <option value="LEIDO">Leído</option>
+            <option value="CON_ERROR">Con error</option>
+            <option value="INCIERTO">Incierto</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filtros activos removibles -->
+      <div class="dc-chips-row" id="dc-active-chips" hidden></div>
+
+      <!-- Consolidado de Cortes Z exclusivo de consulta en pantalla para Administrador General -->
+      <div class="dc-consolidado-banner" id="dc-corte-consolidado-banner" hidden></div>
+
+      <!-- Barra de acciones por lote -->
+      <div class="dc-batch-bar" id="dc-batch-bar" hidden>
+        <div style="font-size:12.5px;font-weight:700;">
+          <i class="fa-solid fa-check-double" aria-hidden="true"></i>
+          <span id="dc-batch-count">0</span> documentos seleccionados por lote
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="dc-btn" id="dc-btn-batch-zip" style="height:30px;font-size:12px;">
+            <i class="fa-solid fa-file-zipper" aria-hidden="true"></i> Descargar ZIP
+          </button>
+          <button type="button" class="dc-btn dc-btn-primary" id="dc-btn-batch-send" style="height:30px;font-size:12px;">
+            <i class="fa-regular fa-paper-plane" aria-hidden="true"></i> Enviar lote
+          </button>
+          <button type="button" class="dc-btn" id="dc-btn-batch-clear" style="height:30px;font-size:12px;">
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Tabla y Miniaturas -->
+      <div class="dc-table-card">
+        <div tabindex="0" role="region" aria-labelledby="dc-table-caption" class="dc-table-region" id="dc-table-region">
+          <table class="dc-table" id="dc-table">
+            <caption id="dc-table-caption" class="dc-sr-only">Listado de documentos emitidos autorizados</caption>
+            <thead>
+              <tr id="dc-thead-row">
+                <th scope="col" class="dc-col-check">
+                  <input type="checkbox" id="dc-check-all" class="dc-row-check" aria-label="Seleccionar documentos de esta página">
+                </th>
+                <th scope="col" data-col="folio">
+                  <button type="button" class="dc-sort-btn" data-sort="folio_visible">
+                    <span>Documento</span><span class="dc-sort-ico" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" data-col="tercero">
+                  <button type="button" class="dc-sort-btn" data-sort="tercero_nombre">
+                    <span>Cliente / proveedor</span><span class="dc-sort-ico" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" data-col="sucursal">
+                  <button type="button" class="dc-sort-btn" data-sort="sucursal_id">
+                    <span>Sucursal</span><span class="dc-sort-ico" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" data-col="emision" aria-sort="descending">
+                  <button type="button" class="dc-sort-btn" data-sort="emitted_at">
+                    <span>Emisión</span><span class="dc-sort-ico" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" data-col="total" class="dc-num-col">
+                  <button type="button" class="dc-sort-btn" data-sort="total_amount" style="justify-content:flex-end;">
+                    <span>Total</span><span class="dc-sort-ico" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" data-col="estado">
+                  <button type="button" class="dc-sort-btn" data-sort="doc_status">
+                    <span>Estado</span><span class="dc-sort-ico" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" aria-label="Acciones rápidas"></th>
+              </tr>
+            </thead>
+            <tbody id="dc-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="dc-grid-view" id="dc-grid-view" hidden></div>
+
+        <div class="dc-table-footer">
+          <div id="dc-pagination-info">0–0 de 0</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button type="button" class="dc-pill-btn" id="dc-page-prev" disabled>
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Anterior
+            </button>
+            <span id="dc-page-indicator" style="font-weight:700;color:var(--dc-text);">Página 1</span>
+            <button type="button" class="dc-pill-btn" id="dc-page-next" disabled>
+              Siguiente <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra contextual inferior (idéntica a la maqueta de referencia) -->
+      <div class="dc-context-bar" id="dc-context-bar">
+        <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--dc-text);">
+          <i class="fa-regular fa-file-lines" style="color:var(--dc-blue);" aria-hidden="true"></i>
+          <span id="dc-ctx-doc-label">Selecciona una fila para abrir su expediente</span>
+        </div>
+        <div class="dc-context-links">
+          <button type="button" class="dc-link-btn" id="dc-ctx-open-origin" disabled>
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Abrir movimiento original
+          </button>
+          <button type="button" class="dc-link-btn" id="dc-ctx-open-related" disabled>
+            <i class="fa-solid fa-link" aria-hidden="true"></i> Ver relacionados
+          </button>
+          <button type="button" class="dc-link-btn" id="dc-btn-sync-index" style="font-size:11.5px;color:var(--dc-muted);" title="Sincronizar índice documental con fuentes en tiempo real">
+            <i class="fa-solid fa-rotate" aria-hidden="true"></i> <span id="dc-sync-stamp">Actualizado hace un momento</span>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ─── ZONA DERECHA: EXPEDIENTE DOCUMENTAL ─── -->
+    <aside class="dc-expediente" id="dc-expediente" aria-label="Expediente del documento" hidden>
+      <div class="dc-resizer" id="dc-resizer" title="Arrastra para redimensionar el expediente"></div>
+
+      <div class="dc-exp-header">
+        <div class="dc-exp-toprow">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <button type="button" class="dc-icon-btn" id="dc-exp-back-history" title="Volver al documento anterior" aria-label="Volver al documento anterior" hidden>
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            </button>
+            <span class="dc-exp-title">Vista previa · Expediente</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <button type="button" class="dc-icon-btn" id="dc-exp-fav" title="Agregar o quitar de Favoritos" aria-label="Favorito">
+              <i class="fa-regular fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="dc-icon-btn" id="dc-exp-dock-toggle" title="Alternar expediente acoplado o superpuesto (óptimo en 1366×768)" aria-label="Alternar acoplamiento">
+              <i class="fa-solid fa-window-restore" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="dc-icon-btn" id="dc-exp-expand" title="Ampliar o restaurar ancho del expediente" aria-label="Ampliar expediente">
+              <i class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="dc-icon-btn" id="dc-exp-close" title="Cerrar expediente (Esc)" aria-label="Cerrar expediente">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="dc-exp-folio-row">
+          <span>Folio: <strong id="dc-exp-folio">—</strong></span>
+          <span id="dc-exp-status-pill" class="dc-status-pill dc-st-ok">Emitida</span>
+          <span id="dc-exp-subtype-lbl" style="font-size:11.5px;color:var(--dc-muted);font-weight:600;"></span>
+        </div>
+      </div>
+
+      <!-- 4 Pestañas del Expediente -->
+      <div class="dc-exp-tablist" role="tablist" aria-label="Secciones del expediente">
+        <button type="button" role="tab" class="dc-exp-tab" id="dc-tab-btn-doc" data-exptab="doc" aria-selected="true">Documento</button>
+        <button type="button" role="tab" class="dc-exp-tab" id="dc-tab-btn-datos" data-exptab="datos" aria-selected="false">Datos</button>
+        <button type="button" role="tab" class="dc-exp-tab" id="dc-tab-btn-rel" data-exptab="rel" aria-selected="false">Relacionados <span id="dc-rel-badge"></span></button>
+        <button type="button" role="tab" class="dc-exp-tab" id="dc-tab-btn-act" data-exptab="act" aria-selected="false">Actividad</button>
+      </div>
+
+      <div class="dc-exp-panels">
+        <!-- Pestaña 1: Documento -->
+        <div role="tabpanel" id="dc-panel-doc" aria-labelledby="dc-tab-btn-doc">
+          <div class="dc-exp-panel-inner">
+            <div class="dc-preview-toolbar">
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+                <select id="dc-preview-format" class="dc-pill-select" aria-label="Formato de vista previa"></select>
+                <select id="dc-preview-rep" class="dc-pill-select" aria-label="Origen de representación">
+                  <option value="original">Original conservado</option>
+                  <option value="updated">Diseño actual</option>
+                </select>
+              </div>
+              <div class="dc-zoom-box" aria-label="Controles de zoom">
+                <button type="button" id="dc-zoom-out" aria-label="Reducir zoom">−</button>
+                <span id="dc-zoom-lbl">100 %</span>
+                <button type="button" id="dc-zoom-in" aria-label="Aumentar zoom">+</button>
+              </div>
+            </div>
+
+            <div class="dc-preview-toolbar" id="dc-page-nav-bar" hidden>
+              <span style="font-size:11.5px;font-weight:700;color:var(--dc-muted);" id="dc-preview-page-lbl">Página 1 de 1</span>
+              <div style="display:flex;gap:4px;">
+                <button type="button" class="dc-pill-btn" id="dc-prev-pg" style="height:26px;padding:0 8px;">‹ Ant.</button>
+                <button type="button" class="dc-pill-btn" id="dc-next-pg" style="height:26px;padding:0 8px;">Sig. ›</button>
+              </div>
+            </div>
+
+            <div class="dc-rep-notice" id="dc-rep-notice">Selecciona un documento para cargar su representación.</div>
+
+            <div class="dc-paper-stage" id="dc-paper-stage">
+              <div class="dc-state-box"><i class="fa-regular fa-file-pdf"></i><span>Sin vista previa activa</span></div>
+            </div>
+
+            <!-- Archivos adjuntos y otras representaciones -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;">
+              <strong style="font-size:12px;">Adjuntos y representaciones</strong>
+              <label class="dc-link-btn" id="dc-upload-att-lbl" style="font-size:11.5px;cursor:pointer;">
+                <i class="fa-solid fa-paperclip" aria-hidden="true"></i> Adjuntar archivo
+                <input type="file" id="dc-att-file-input" accept=".pdf,.png,.jpg,.jpeg,.xml" hidden>
+              </label>
+            </div>
+            <div id="dc-attachments-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+          </div>
+        </div>
+
+        <!-- Pestaña 2: Datos -->
+        <div role="tabpanel" id="dc-panel-datos" aria-labelledby="dc-tab-btn-datos" hidden>
+          <div class="dc-exp-panel-inner" id="dc-datos-container"></div>
+        </div>
+
+        <!-- Pestaña 3: Relacionados -->
+        <div role="tabpanel" id="dc-panel-rel" aria-labelledby="dc-tab-btn-rel" hidden>
+          <div class="dc-exp-panel-inner" id="dc-rel-container"></div>
+        </div>
+
+        <!-- Pestaña 4: Actividad -->
+        <div role="tabpanel" id="dc-panel-act" aria-labelledby="dc-tab-btn-act" hidden>
+          <div class="dc-exp-panel-inner" id="dc-act-container"></div>
+        </div>
+      </div>
+
+      <!-- Botonera fija permanente del Expediente -->
+      <div class="dc-exp-actions">
+        <button type="button" class="dc-btn dc-btn-primary" id="dc-exp-btn-print" style="width:100%;height:38px;">
+          <i class="fa-solid fa-print" aria-hidden="true"></i> Imprimir
+        </button>
+        <div class="dc-exp-actions-sec">
+          <button type="button" class="dc-btn" id="dc-exp-btn-download">
+            <i class="fa-solid fa-download" aria-hidden="true"></i> Descargar
+          </button>
+          <button type="button" class="dc-btn" id="dc-exp-btn-send">
+            <i class="fa-regular fa-paper-plane" aria-hidden="true"></i> Enviar
+          </button>
+        </div>
+        <div id="dc-exp-avail-note" style="font-size:11px;color:var(--dc-muted);">Formato Carta · PDF disponible</div>
+      </div>
+    </aside>
+
+  </div><!-- /.dc-workspace -->
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MODALES NATIVOS (<dialog> modern-web-guidance)
+       ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Modal 1: Guardar Vista -->
+  <dialog class="dc-dialog" id="dc-dialog-save-view" aria-labelledby="dc-dlg-sv-title" style="width:min(440px,94vw);">
+    <div class="dc-dlg-head">
+      <h2 id="dc-dlg-sv-title">Guardar vista personalizada</h2>
+      <button type="button" class="dc-icon-btn" data-close-dlg="dc-dialog-save-view" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="dc-dlg-body">
+      <div class="dc-fld">
+        <label for="dc-sv-name">Nombre de la vista (MAYÚSCULAS)</label>
+        <input type="text" id="dc-sv-name" class="dc-upper-input" placeholder="EJ. FACTURAS MATRIZ HOY" autofocus>
+      </div>
+      <div style="font-size:12px;color:var(--dc-muted);">Se guardará para tu usuario y empresa activa con los filtros actuales.</div>
+    </div>
+    <div class="dc-dlg-foot">
+      <button type="button" class="dc-btn" data-close-dlg="dc-dialog-save-view">Cancelar</button>
+      <button type="button" class="dc-btn dc-btn-primary" id="dc-sv-confirm">Guardar vista</button>
+    </div>
+  </dialog>
+
+  <!-- Modal 2: Columnas y Densidad -->
+  <dialog class="dc-dialog" id="dc-dialog-prefs" aria-labelledby="dc-dlg-pf-title" style="width:min(480px,94vw);">
+    <div class="dc-dlg-head">
+      <h2 id="dc-dlg-pf-title">Columnas y preferencias de vista</h2>
+      <button type="button" class="dc-icon-btn" data-close-dlg="dc-dialog-prefs" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="dc-dlg-body">
+      <div class="dc-fld">
+        <label for="dc-pref-density">Densidad de tabla</label>
+        <select id="dc-pref-density" autofocus>
+          <option value="comfortable">Cómoda (recomendada)</option>
+          <option value="compact">Compacta (alta densidad)</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--dc-muted);margin-bottom:6px;">Columnas visibles</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;color:var(--dc-text);" id="dc-pref-cols">
+          <label><input type="checkbox" value="folio" checked disabled> Documento / Folio</label>
+          <label><input type="checkbox" value="tercero" checked> Cliente / Proveedor</label>
+          <label><input type="checkbox" value="sucursal" checked> Sucursal</label>
+          <label><input type="checkbox" value="emision" checked> Fecha de emisión</label>
+          <label><input type="checkbox" value="total" checked> Importe Total</label>
+          <label><input type="checkbox" value="estado" checked> Estado</label>
+        </div>
+      </div>
+    </div>
+    <div class="dc-dlg-foot">
+      <button type="button" class="dc-btn" data-close-dlg="dc-dialog-prefs">Cerrar</button>
+      <button type="button" class="dc-btn dc-btn-primary" id="dc-pref-save">Guardar preferencias</button>
+    </div>
+  </dialog>
+
+  <!-- Modal 3: Exportar Listado / Imprimir Reporte -->
+  <dialog class="dc-dialog" id="dc-dialog-export" aria-labelledby="dc-dlg-ex-title" style="width:min(480px,94vw);">
+    <div class="dc-dlg-head">
+      <h2 id="dc-dlg-ex-title">Exportar o imprimir reporte filtrado</h2>
+      <button type="button" class="dc-icon-btn" data-close-dlg="dc-dialog-export" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="dc-dlg-body">
+      <div class="dc-fld">
+        <label for="dc-exp-scope">Alcance de registros</label>
+        <select id="dc-exp-scope" autofocus>
+          <option value="all_results">Todos los resultados filtrados</option>
+          <option value="current_page">Únicamente la página actual</option>
+        </select>
+      </div>
+      <div class="dc-fld">
+        <label for="dc-exp-format">Formato de salida</label>
+        <select id="dc-exp-format">
+          <option value="csv">CSV protegido frente a fórmulas (.csv)</option>
+          <option value="xlsx">Libro Microsoft Excel (.xlsx)</option>
+          <option value="print">Imprimir reporte en pantalla</option>
+        </select>
+      </div>
+      <div id="dc-exp-msg" style="font-size:12px;color:var(--dc-text-2);">Se exportarán únicamente las columnas y los importes autorizados para tu rol.</div>
+    </div>
+    <div class="dc-dlg-foot">
+      <button type="button" class="dc-btn" data-close-dlg="dc-dialog-export">Cancelar</button>
+      <button type="button" class="dc-btn dc-btn-primary" id="dc-exp-confirm">Generar salida</button>
+    </div>
+  </dialog>
+
+  <!-- Modal 4: Imprimir Documento (Agente local / Navegador) -->
+  <dialog class="dc-dialog" id="dc-dialog-print" aria-labelledby="dc-dlg-pr-title" style="width:min(500px,94vw);">
+    <div class="dc-dlg-head">
+      <h2 id="dc-dlg-pr-title">Imprimir documento</h2>
+      <button type="button" class="dc-icon-btn" data-close-dlg="dc-dialog-print" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="dc-dlg-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="dc-fld">
+          <label for="dc-pr-format">Formato</label>
+          <select id="dc-pr-format" autofocus>
+            <option value="CARTA">Tamaño Carta</option>
+            <option value="TICKET">Ticket térmico 80mm</option>
+          </select>
+        </div>
+        <div class="dc-fld">
+          <label for="dc-pr-rep">Representación</label>
+          <select id="dc-pr-rep">
+            <option value="original">Original conservado</option>
+            <option value="updated">Nueva representación (plantilla actual)</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px;">
+        <div class="dc-fld">
+          <label for="dc-pr-printer">Impresora / Destino</label>
+          <select id="dc-pr-printer"></select>
+        </div>
+        <div class="dc-fld">
+          <label for="dc-pr-copies">Copias</label>
+          <input type="number" id="dc-pr-copies" min="1" max="10" value="1">
+        </div>
+      </div>
+      <div style="font-size:11.8px;color:var(--dc-text-2);background:var(--dc-surface-2);padding:9px 11px;border-radius:8px;border:1px solid var(--dc-border);">
+        Si se abre el diálogo del navegador se registrará en bitácora <strong>«Solicitud de impresión»</strong>. El estado <strong>«Impreso»</strong> se reserva para confirmación física real del agente local.
+      </div>
+    </div>
+    <div class="dc-dlg-foot">
+      <button type="button" class="dc-btn" data-close-dlg="dc-dialog-print">Cancelar</button>
+      <button type="button" class="dc-btn dc-btn-primary" id="dc-pr-confirm">
+        <i class="fa-solid fa-print" aria-hidden="true"></i> Solicitar impresión
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Modal 5: Descargar Representaciones / Resultado de Lote ZIP -->
+  <dialog class="dc-dialog" id="dc-dialog-download" aria-labelledby="dc-dlg-dl-title" style="width:min(520px,94vw);">
+    <div class="dc-dlg-head">
+      <h2 id="dc-dlg-dl-title">Descargar archivos autorizados</h2>
+      <button type="button" class="dc-icon-btn" data-close-dlg="dc-dialog-download" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="dc-dlg-body" id="dc-dlg-dl-body"></div>
+    <div class="dc-dlg-foot">
+      <button type="button" class="dc-btn" data-close-dlg="dc-dialog-download" autofocus>Cerrar</button>
+    </div>
+  </dialog>
+
+  <!-- Modal 6: Enviar Documento o Lote (Previsualización, Idempotencia, Reintento Seguro y Enlace Temporal) -->
+  <dialog class="dc-dialog" id="dc-dialog-send" aria-labelledby="dc-dlg-sd-title" style="width:min(660px,95vw);">
+    <div class="dc-dlg-head">
+      <h2 id="dc-dlg-sd-title">Enviar documentos</h2>
+      <button type="button" class="dc-icon-btn" data-close-dlg="dc-dialog-send" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="dc-dlg-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="dc-fld">
+          <label for="dc-sd-channel">Canal de envío</label>
+          <select id="dc-sd-channel" autofocus>
+            <option value="EMAIL">Correo electrónico</option>
+            <option value="WHATSAPP_API">WhatsApp API (Twilio)</option>
+            <option value="CONECT">CONECT Mensajería</option>
+            <option value="WHATSAPP_WEB">Abrir WhatsApp (manual asistido)</option>
+            <option value="SHARE_LINK">Enlace seguro con vencimiento</option>
+          </select>
+        </div>
+        <div class="dc-fld" id="dc-sd-mode-wrap">
+          <label for="dc-sd-testmode">Modo de operación</label>
+          <select id="dc-sd-testmode">
+            <option value="false">Operación real (proveedor configurado)</option>
+            <option value="true">Prueba de integración (bandeja local sin envío externo)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="dc-sd-channel-note" style="font-size:11.8px;padding:7px 10px;border-radius:8px;background:var(--dc-info-bg);color:var(--dc-info-txt);border:1px solid var(--dc-border);"></div>
+
+      <!-- Sección para Enlace Seguro -->
+      <div id="dc-sd-share-box" hidden style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+          <div class="dc-fld">
+            <label for="dc-sh-fmt">Archivo autorizado</label>
+            <select id="dc-sh-fmt">
+              <option value="CARTA">PDF Carta</option>
+              <option value="TICKET">PDF Ticket</option>
+              <option value="XML">XML Firmado</option>
+            </select>
+          </div>
+          <div class="dc-fld">
+            <label for="dc-sh-hours">Vigencia</label>
+            <select id="dc-sh-hours">
+              <option value="24">24 horas</option>
+              <option value="72">72 horas</option>
+              <option value="168">7 días</option>
+            </select>
+          </div>
+          <div class="dc-fld">
+            <label for="dc-sh-max">Máx. descargas</label>
+            <input type="number" id="dc-sh-max" min="1" max="50" value="5">
+          </div>
+        </div>
+        <button type="button" class="dc-btn dc-btn-primary" id="dc-btn-create-share">Generar enlace limitado</button>
+        <div id="dc-share-links-result"></div>
+      </div>
+
+      <!-- Sección para Envío Individual / por Lote -->
+      <div id="dc-sd-dispatch-box" style="display:flex;flex-direction:column;gap:10px;">
+        <div id="dc-sd-recipients-editor" style="display:flex;flex-direction:column;gap:8px;"></div>
+
+        <div class="dc-fld">
+          <label for="dc-sd-message">Mensaje / Nota (se normaliza a MAYÚSCULAS)</label>
+          <input type="text" id="dc-sd-message" class="dc-upper-input" placeholder="EJ. ADJUNTAMOS SU COMPROBANTE EMITIDO EN CALEBSYS">
+        </div>
+
+        <!-- Resumen de confirmación previa: destinatario, canal, mensaje y archivos exactos -->
+        <div style="background:var(--dc-surface-2);border:1px solid var(--dc-border);border-radius:10px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dc-muted);margin-bottom:6px;">
+            Confirmación previa · Archivos exactos por destinatario
+          </div>
+          <div id="dc-sd-preview-summary" style="font-size:12px;display:flex;flex-direction:column;gap:6px;"></div>
+        </div>
+
+        <!-- Resultado de operación e historial de reintento seguro -->
+        <div id="dc-sd-result-box" hidden style="background:var(--dc-surface-2);border:1px solid var(--dc-border);border-radius:10px;padding:10px 12px;"></div>
+      </div>
+    </div>
+    <div class="dc-dlg-foot">
+      <button type="button" class="dc-btn" data-close-dlg="dc-dialog-send">Cerrar</button>
+      <button type="button" class="dc-btn" id="dc-sd-refresh-provider" hidden>Consultar proveedor</button>
+      <button type="button" class="dc-btn" id="dc-sd-retry-failed" hidden>Reintentar solo fallidos seguros</button>
+      <button type="button" class="dc-btn dc-btn-primary" id="dc-sd-confirm">Confirmar envío</button>
+    </div>
+  </dialog>
+
+</div>
